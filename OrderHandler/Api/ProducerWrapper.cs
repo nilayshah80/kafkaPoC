@@ -20,6 +20,7 @@ namespace Api
             this._config = config;
             //this._producer = new Producer<string,string>(this._config);
             this._producer = new ProducerBuilder<string, string>(config).Build();
+            
             /*this._producer.OnError += (_,e)=>{
                 Console.WriteLine("Exception:"+e);
             };*/
