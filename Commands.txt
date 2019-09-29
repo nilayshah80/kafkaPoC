@@ -6,16 +6,43 @@
 docker exec -it kafka bash
 
 //List topics
-kafka-topics --zookeeper zookeeper:2181 --list
+kafka-topics --bootstrap-server :9092 --list
 
 //Create topic with 3 partition and 1 IRC
+//old
 kafka-topics --zookeeper zookeeper:2181 --create --topic t1 --partitions 3 --replication-factor 1
+//kafka 2.2
+kafka-topics --bootstrap-server :9092 --create --topic first_topic --partitions 3 --replication-factor 1
 
 //Describe topic
-kafka-topics --zookeeper zookeeper:2181 --describe --topic t1
+kafka-topics --bootstrap-server :9092 --describe --topic first_topic
+
+//Delete topic
+kafka-topics --bootstrap-server :9092 --topic t1 --delete
 
 //Producer... And start typing
-kafka-console-producer --broker-list :9092 --topic t1
+kafka-console-producer --broker-list :9092 --topic first_topic
+//acks=all
+kafka-console-producer --broker-list :9092 --topic first_topic --producer-property acks=all
 
-//Consumer
-kafka-console-consumer --bootstrap-server :9092  --group my-group --topic t1
+//Consumer - read only new messages
+kafka-console-consumer --bootstrap-server :9092  --topic first_topic
+//Consumer - to read from beginning
+kafka-console-consumer --bootstrap-server :9092  --topic first_topic --from-beginning
+
+//Consumer group
+kafka-console-consumer --bootstrap-server :9092  --group my-group --topic first_topic
+kafka-console-consumer --bootstrap-server :9092  --group my-second-group --topic first_topic --from-beginning
+
+kafka-consumer-groups --bootstrap-server :9092 --list
+kafka-consumer-groups --bootstrap-server :9092 --describe --group my-group
+//Reset offsets
+kafka-consumer-groups --bootstrap-server :9092  --group my-group --reset-offsets --to-earliest --execute --topic first_topic
+//shift offsets
+kafka-consumer-groups --bootstrap-server :9092  --group my-group --reset-offsets --shift-by -2 --execute --topic first_topic
+
+//Producers with keys
+kafka-console-producer --broker-list :9092 --topic first_topic --property parse.key=true --property key.separator=,
+
+//Consumer with keys
+kafka-console-consumer --bootstrap-server :9092  --topic first_topic --from-beginning --property print.key=true --property key.separator=,
