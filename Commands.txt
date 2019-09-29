@@ -1,5 +1,16 @@
 docker exec -it kafka bash
 
+//List topics
 kafka-topics --zookeeper zookeeper:2181 --list
+
+//Create topic with 3 partition and 1 IRC
 kafka-topics --zookeeper zookeeper:2181 --create --topic t1 --partitions 3 --replication-factor 1
+
+//Describe topic
 kafka-topics --zookeeper zookeeper:2181 --describe --topic t1
+
+//Producer... And start typing
+kafka-console-producer --broker-list :9092 --topic t1
+
+//Consumer
+kafka-console-consumer --bootstrap-server :9092  --group my-group --topic t1
