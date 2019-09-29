@@ -36,7 +36,7 @@ namespace Api
                 Console.WriteLine($"KAFKA => Delivered '{dr.Value}' to '{dr.TopicPartitionOffset}'");
                 return;
             }
-            catch (ProduceException<Null, string> e)
+            catch (ProduceException<string, string> e)
             {
                 Console.WriteLine($"Delivery failed: {e.Error.Reason}");
             }
