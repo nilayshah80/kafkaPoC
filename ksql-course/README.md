@@ -724,7 +724,8 @@ select TIMESTAMPTOSTRING(WindowStart(), 'HH:mm:ss')
 , TOPK(city_name, 3)
 , count(*)
 FROM rr_world
-WINDOW TUMBLING (SIZE 1 minute);
+WINDOW TUMBLING (SIZE 1 minute)
+GROUP BY data_source;
 
 ```
 
