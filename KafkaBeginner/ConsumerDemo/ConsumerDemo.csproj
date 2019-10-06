@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
@@ -8,5 +9,17 @@
     <ItemGroup>
       <PackageReference Include="Confluent.Kafka" Version="1.2.0" />
     </ItemGroup>
+=======
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="1.2.0" />
+  </ItemGroup>
+>>>>>>> cee441f3c858500917abd865c3ab50ab042d79ad
 
 </Project>
